@@ -1,0 +1,40 @@
+syntax="proto3";
+ 
+package proto;
+ 
+option go_package="GRPC_GO_CRUD/gRPC_GO_crud";
+ 
+ 
+message User {
+   string id =1;
+   string name =2;
+   int32 age =3;
+}
+ 
+message CreateUserRequest {
+   User user = 1;
+}
+message CreateUserResponse {
+	User user = 1;
+}
+message ReadUserRequest{
+   string id =1;
+}
+message ReadUserResponse{
+	User user =1;
+}
+message UpdateUserRequest{
+	User user =1;
+}
+message UpdateUserResponse{
+	User user =1;
+}
+ 
+ 
+service UserService {
+   rpc CreateUser(CreateUserRequest) returns (CreateUserResponse) {}
+   rpc GetUser(ReadUserRequest) returns (ReadUserResponse) {}
+   rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {}
+}
+
+// protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative proto/user.proto
